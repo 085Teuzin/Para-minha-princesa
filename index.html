@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Para Minha Princesa ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background: linear-gradient(135deg, #050002 0%, #170208 50%, #080003 100%);
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .roses-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+      background: radial-gradient(circle at center, rgba(160, 0, 20, 0.2) 0%, rgba(0, 0, 0, 0.85) 100%);
+    }
+    .particle {
+      position: absolute;
+      background: #ff1e4d;
+      border-radius: 50%;
+      animation: floatParticle 7s infinite ease-in-out;
+      opacity: 0.5;
+    }
+    @keyframes floatParticle {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.2; }
+      50% { transform: translateY(-40px) scale(1.4); opacity: 0.7; }
+    }
+    .app-viewport {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      height: 100vh;
+      max-height: 880px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+    }
+    .section {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      background: rgba(12, 1, 4, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255, 30, 77, 0.4);
+      border-radius: 28px;
+      padding: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.95), inset 0 0 30px rgba(255, 30, 77, 0.15);
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+    .section.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    #sec-intro {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+    }
+    .royal-seal {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transition: transform 0.2s ease;
+    }
+    .royal-seal:active {
+      transform: scale(0.94);
+    }
+    .seal-emblem {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, #ff1e4d, #700000);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+      box-shadow: 0 0 35px rgba(255, 30, 77, 0.7);
+      animation: royalPulse 1.8s infinite ease-in-out;
+      border: 2px solid #fff;
+    }
+    @keyframes royalPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 30, 77, 0.5); }
+      50% { transform: scale(1.08); box-shadow: 0 0 38px rgba(255, 30, 77, 0.95); }
+    }
+    .intro-title {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      color: #ff4d73;
+      letter-spacing: 1px;
+    }
+    .intro-sub {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 8px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 30, 77, 0.3);
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 30, 77, 0.25);
+    }
+    .section-header h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      color: #ff4d73;
+      letter-spacing: 1px;
+    }
+    .content-scroll {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-right: 4px;
+    }
+    .content-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .content-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 30, 77, 0.4);
+      border-radius: 4px;
+    }
+    .story-item {
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 30, 77, 0.25);
+      border-radius: 16px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .story-title {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      color: #ff859e;
+      letter-spacing: 0.5px;
+    }
+    .story-img-box {
+      width: 100%;
+      aspect-ratio: 6 / 5;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #000;
+    }
+    .story-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .letter-p {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #fce8ed;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 12px 14px;
+      border-radius: 14px;
+      border-left: 3.5px solid #ff1e4d;
+    }
+    .proposal-box {
+      background: linear-gradient(135deg, rgba(140, 0, 25, 0.5), rgba(255, 30, 77, 0.35));
+      border: 1.5px solid #ff1e4d;
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #fff;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+      letter-spacing: 0.5px;
+    }
+    .action-area {
+      position: relative;
+      height: 70px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      padding: 8px;
+      border: 1px solid rgba(255, 30, 77, 0.25);
+    }
+    .btn-custom {
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    }
+    .btn-yes {
+      background: linear-gradient(135deg, #ff1e4d, #8b0000);
+      color: #fff;
+      flex: 1;
+      max-width: 140px;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+    .btn-yes:active {
+      transform: scale(0.95);
+    }
+    .btn-no {
+      background: linear-gradient(135deg, #1f1f1f, #0a0a0a);
+      color: #ff4d73;
+      border: 1px solid rgba(255, 30, 77, 0.5);
+      position: fixed;
+      width: 100px;
+      height: 42px;
+      z-index: 999;
+      transition: top 0.15s ease, left 0.15s ease;
+    }
+    .nav-btn {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, #ff1e4d, #8b0000);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(255, 30, 77, 0.4);
+      margin-top: 10px;
+    }
+    .nav-btn:active {
+      transform: scale(0.98);
+    }
+    .celeb-banner {
+      background: linear-gradient(135deg, rgba(140, 0, 25, 0.5), rgba(255, 30, 77, 0.25));
+      border: 1px solid rgba(255, 30, 77, 0.45);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+    }
+    .celeb-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      color: #ff859e;
+      letter-spacing: 1px;
+    }
+    .celeb-sub {
+      font-size: 12px;
+      color: #ff4d73;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+    .timer-box {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+      border: 1px solid rgba(255, 30, 77, 0.3);
+    }
+    .timer-label {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .timer-digits {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ff1e4d;
+      font-family: monospace;
+    }
+    .grid-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .card-info {
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid rgba(255, 30, 77, 0.2);
+    }
+    .card-info-title {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      color: #ff4d73;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .card-info-value {
+      font-size: 13px;
+      color: #fff;
+      font-weight: 600;
+    }
+    .card-info-sub {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+    .final-msg {
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #fce8ed;
+      border: 1px solid rgba(255, 30, 77, 0.2);
+    }
+    .confetti {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      background: #ff1e4d;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: confettiFall 3s linear infinite;
+      z-index: 100;
+    }
+    @keyframes confettiFall {
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="audio-music" loop src="music.mp3"></audio>
+  <audio id="audio-cancao" loop src="cancao.mp3"></audio>
+  <audio id="audio-sim" src="sim.mp3"></audio>
+  <audio id="audio-click" src="click.mp3"></audio>
+
+  <div class="roses-bg" id="rosesContainer"></div>
+
+  <div class="app-viewport">
+    
+    <div class="section active" id="sec-intro">
+      <div class="royal-seal" onclick="openEnvelope()">
+        <div class="seal-emblem">👑</div>
+        <div class="intro-title">Para Minha Princesa, Sophya</div>
+        <div class="intro-sub">Toque para abrir nossa história</div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-gallery">
+      <div class="section-header">
+        <h2>Meu Amor ✨❤️</h2>
+      </div>
+      <div class="content-scroll">
+        <div class="story-item">
+          <div class="story-title">1. O Sorriso Que Me Conquistou</div>
+          <div class="story-img-box">
+            <img src="img1.jpg" alt="Princesa 1" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'500\' fill=\'%23050002\'><text x=\'50%\' y=\'50%\' fill=\'%23ff4d73\' text-anchor=\'middle\'>img1.jpg</text></svg>'">
+          </div>
+        </div>
+        <div class="story-item">
+          <div class="story-title">2. Minha Garota Perfeita</div>
+          <div class="story-img-box">
+            <img src="img2.jpg" alt="Princesa 2" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'500\' fill=\'%23050002\'><text x=\'50%\' y=\'50%\' fill=\'%23ff4d73\' text-anchor=\'middle\'>img2.jpg</text></svg>'">
+          </div>
+        </div>
+        <div class="story-item">
+          <div class="story-title">3. Minha gatinha gostosa</div>
+          <div class="story-img-box">
+            <img src="img3.jpg" alt="Princesa 3" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'500\' fill=\'%23050002\'><text x=\'50%\' y=\'50%\' fill=\'%23ff4d73\' text-anchor=\'middle\'>img3.jpg</text></svg>'">
+          </div>
+        </div>
+        <div class="story-item">
+          <div class="story-title">4. Minha Princesa fofa</div>
+          <div class="story-img-box">
+            <img src="img4.jpg" alt="Princesa 4" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'500\' fill=\'%23050002\'><text x=\'50%\' y=\'50%\' fill=\'%23ff4d73\' text-anchor=\'middle\'>img4.jpg</text></svg>'">
+          </div>
+        </div>
+        <div class="story-item">
+          <div class="story-title">5. Minha Chatinha queida</div>
+          <div class="story-img-box">
+            <img src="img5.jpg" alt="Princesa 5" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'500\' fill=\'%23050002\'><text x=\'50%\' y=\'50%\' fill=\'%23ff4d73\' text-anchor=\'middle\'>img5.jpg</text></svg>'">
+          </div>
+        </div>
+        <div class="story-item">
+          <div class="story-title">6. Minha Razão De Sorrir</div>
+          <div class="story-img-box">
+            <img src="img6.jpg" alt="Princesa 6" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'500\' fill=\'%23050002\'><text x=\'50%\' y=\'50%\' fill=\'%23ff4d73\' text-anchor=\'middle\'>img6.jpg</text></svg>'">
+          </div>
+        </div>
+      </div>
+      <button class="nav-btn" onclick="goToLetter()">Ler a Minha Carta & Pedido 🌹</button>
+    </div>
+
+    <div class="section" id="sec-letter">
+      <div class="section-header">
+        <h2>Carta Para Minha Princesa 📜</h2>
+      </div>
+      <div class="content-scroll">
+        <div class="letter-p">
+          Minha princesa, quando eu paro para pensar em tudo o que a gente viveu até aqui, parece até história de filme. A gente se conheceu naquele Discord, sem nenhuma pretensão, e quem diria que daquele cantinho da internet nasceria a história mais bonita da minha vida.
+        </div>
+        <div class="letter-p">
+          No começo, as coisas foram um caos completo. A gente brigava por tudo, discutia feio, eu te xingava, você me xingava de volta, rolava um monte de mal-entendido e até dias inteiros sem se falar, em um silêncio chato que deixava tudo pesado. Parecia que nada ia dar certo entre a gente.
+        </div>
+        <div class="letter-p">
+          Mas o destino tinha outros planos para nós, princesa. Aos poucos, a poeira foi baixando, a gente foi se acalmando e reaprendendo a conversar. Das brigas, passamos para as risadas; das discussões, passamos para as piadas internas e as zoações intermináveis. A gente brincava igual a dois loucos e, sem perceber, estávamos nos aproximando cada vez mais.
+        </div>
+        <div class="letter-p">
+          E aí veio a nossa primeira noite dormida juntos em call... Aquele dia mudou tudo. Ouvir a sua respiração calma do outro lado da linha me deu uma paz que eu nunca tinha sentido antes. Dali em diante, virou rotina: começamos a fazer chamadas todos os dias, passando horas e horas conversando sobre tudo e sobre nada, apenas para ficar ouvindo a voz um do outro.
+        </div>
+        <div class="letter-p">
+          Foi ali, em meio a todas essas horas em call, ouvindo sua risada doce e conhecendo cada detalhe do seu jeito, que eu me vi completamente apaixonado por você. O meu peito acelerava a cada notificação sua. Eu fui descobrindo na minha princesa a garota mais incrível, atenciosa e apaixonante do mundo inteiro.
+        </div>
+        <div class="letter-p">
+          Hoje, minha princesa, eu sou o cara mais feliz desse planeta por ter você ao meu lado. Eu amo acordar sabendo que tenho você, amo passar o dia conversando com você, amo o seu sorriso e o jeito único como você cuida do meu coração. A distância entre Fortaleza e Recife não é nada perto do sentimento que a gente construiu juntos.
+        </div>
+        <div class="proposal-box">
+          MINHA PRINCESA SOPHYA, VOCÊ ACEITA SER OFICIALMENTE A MINHA NAMORADA, A MINHA PARCEIRA DE VIDA E A ÚNICA DONA DO MEU CORAÇÃO PARA SEMPRE?
+        </div>
+      </div>
+      <div class="action-area" id="proposalArea">
+        <button class="btn-custom btn-yes" onclick="acceptProposal()">SIM! ❤️</button>
+        <button class="btn-custom btn-no" id="btnNo" onmouseover="fleeButton()" onclick="fleeButton()">Não 😜</button>
+      </div>
+    </div>
+
+    <div class="section" id="sec-celeb">
+      <div class="content-scroll">
+        <div class="celeb-banner">
+          <div class="celeb-title">FOI AQUI QUE NOSSO AMOR COMEÇOU!</div>
+          <div class="celeb-sub">Mateus & Sophya • Para Sempre Juntos</div>
+        </div>
+
+        <div class="timer-box">
+          <div class="timer-label">Estamos Namorando Desde:</div>
+          <div class="timer-digits" id="timerDisplay">Carregando...</div>
+        </div>
+
+        <div class="grid-info">
+          <div class="card-info">
+            <div class="card-info-title">Mateus</div>
+            <div class="card-info-value">17 Anos</div>
+            <div class="card-info-sub">Fortaleza - CE</div>
+          </div>
+          <div class="card-info">
+            <div class="card-info-title">Sophya</div>
+            <div class="card-info-value">14 Anos</div>
+            <div class="card-info-sub">Recife - PE</div>
+          </div>
+        </div>
+
+        <div class="final-msg">
+          <strong>Meu Amor Eterno:</strong> Minha princesa, nossa caminhada foi cheia de altos e baixos, mas cada segundo valeu a pena para chegar até aqui. Eu te amo demais, prometo fazer de tudo por você todos os dias e muito em breve estaremos bem juntinhos pessoalmente!
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function playTouchSound() {
+      const clickAudio = document.getElementById('audio-click');
+      if (clickAudio) {
+        clickAudio.currentTime = 0;
+        clickAudio.play().catch(() => {});
+      }
+    }
+
+    function createParticles() {
+      const container = document.getElementById('rosesContainer');
+      for (let i = 0; i < 30; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 5 + 2;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = Math.random() * 100 + '%';
+        p.style.animationDelay = (Math.random() * 6) + 's';
+        container.appendChild(p);
+      }
+    }
+
+    function openEnvelope() {
+      playTouchSound();
+      const music = document.getElementById('audio-music');
+      music.play().catch(() => {});
+      goToSection('sec-gallery');
+    }
+
+    function goToLetter() {
+      playTouchSound();
+      const music = document.getElementById('audio-music');
+      music.pause();
+      const cancao = document.getElementById('audio-cancao');
+      cancao.play().catch(() => {});
+      goToSection('sec-letter');
+      initFleeButtonPosition();
+    }
+
+    function goToSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function initFleeButtonPosition() {
+      const btn = document.getElementById('btnNo');
+      const area = document.getElementById('proposalArea');
+      const rect = area.getBoundingClientRect();
+      btn.style.left = (rect.right - 120) + 'px';
+      btn.style.top = (rect.top + 14) + 'px';
+    }
+
+    function fleeButton() {
+      playTouchSound();
+      const btn = document.getElementById('btnNo');
+      const btnWidth = 100;
+      const btnHeight = 42;
+      const maxX = window.innerWidth - btnWidth - 20;
+      const maxY = window.innerHeight - btnHeight - 20;
+      const newX = Math.max(20, Math.floor(Math.random() * maxX));
+      const newY = Math.max(20, Math.floor(Math.random() * maxY));
+      btn.style.left = newX + 'px';
+      btn.style.top = newY + 'px';
+    }
+
+    function acceptProposal() {
+      playTouchSound();
+      const cancao = document.getElementById('audio-cancao');
+      cancao.pause();
+      const simAudio = document.getElementById('audio-sim');
+      simAudio.play().catch(() => {});
+
+      const btnNo = document.getElementById('btnNo');
+      if (btnNo) btnNo.style.display = 'none';
+
+      if (!localStorage.getItem('startDate_Teuzin_Sophya')) {
+        localStorage.setItem('startDate_Teuzin_Sophya', new Date().toISOString());
+      }
+      triggerConfetti();
+      goToSection('sec-celeb');
+      startTimer();
+    }
+
+    function triggerConfetti() {
+      for (let i = 0; i < 60; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.animationDelay = (Math.random() * 2) + 's';
+        c.style.backgroundColor = ['#ff1e4d', '#8b0000', '#ffffff', '#ff4d73'][Math.floor(Math.random() * 4)];
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4000);
+      }
+    }
+
+    function startTimer() {
+      let saved = localStorage.getItem('startDate_Teuzin_Sophya');
+      if (!saved) {
+        saved = new Date().toISOString();
+        localStorage.setItem('startDate_Teuzin_Sophya', saved);
+      }
+      const startDate = new Date(saved);
+
+      function update() {
+        const now = new Date();
+        const diff = now - startDate;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / (1000 * 60)) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+
+        const dayStr = days > 0 ? `${days}d ` : '';
+        const hStr = String(hours).padStart(2, '0');
+        const mStr = String(mins).padStart(2, '0');
+        const sStr = String(secs).padStart(2, '0');
+
+        document.getElementById('timerDisplay').innerText = `${dayStr}${hStr}h ${mStr}m ${sStr}s`;
+      }
+
+      update();
+      setInterval(update, 1000);
+    }
+
+    window.onload = function() {
+      createParticles();
+      if (localStorage.getItem('startDate_Teuzin_Sophya')) {
+        goToSection('sec-celeb');
+        startTimer();
+      }
+    };
+  </script>
+</body>
+</html>
